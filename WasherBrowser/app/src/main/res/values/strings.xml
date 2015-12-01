@@ -5,4 +5,5 @@
     <string name="main_refresh_button">Click to Refresh</string>
     <string name="main_name_content">Washer\nBrowser</string>
     <string name="main_activity_failed">Please check Wi-Fi connection</string>
+    <string name="main_activity_input_url">http://admin.kaist.ac.kr:3535/get_all</string>
 </resources>
