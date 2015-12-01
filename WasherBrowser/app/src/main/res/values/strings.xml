@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WasherBrowser</string>
+    <string name="main_creator">Created by team IoTeam</string>
+    <string name="main_loading">Finding your location, Please wait...</string>
+    <string name="main_refresh_button">Click to Refresh</string>
+    <string name="main_name_content">Washer\nBrowser</string>
+    <string name="main_activity_failed">Please check Wi-Fi connection</string>
+</resources>

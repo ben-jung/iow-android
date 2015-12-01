@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#1d73bd" tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/main_creator"
+        android:textColor="@color/main_name"
+        android:id="@+id/mainCreateTextView"
+        android:layout_gravity="right|top"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#c5cfe3"
+        android:textStyle="bold" android:textSize="50sp" android:gravity="center"
+        android:text="@string/main_name_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/main_loading"
+        android:textColor="@color/main_name"
+        android:id="@+id/main_loadingTextView"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="200dp"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_progressBar"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="120dp" />
+</FrameLayout>
