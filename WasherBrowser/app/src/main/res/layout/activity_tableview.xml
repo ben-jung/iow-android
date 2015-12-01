@@ -9,6 +9,15 @@
 
     <include layout="@layout/content_tableview" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:divider="#00ffffff"
+        android:dividerHeight="20dp"
+        android:choiceMode="singleChoice"
+        android:id="@+id/washerListView" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

@@ -1,6 +1,5 @@
 package kaist.cs492c_2015.washerbrowser;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -19,6 +19,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 public class TableViewActivity extends AppCompatActivity {
@@ -26,11 +27,15 @@ public class TableViewActivity extends AppCompatActivity {
     private final int REFRESH_LENGTH = 1000;
     private String washerList = "";
     private FloatingActionButton fab;
+    private ListView washerListView;
+    private WasherAdapter washerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tableview);
+
+        washerListView = (ListView) findViewById(R.id.washerListView);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +57,8 @@ public class TableViewActivity extends AppCompatActivity {
             public void run() {
                 Log.i("List: ", washerList);
                 if (!washerList.equals("")) {
-
+                    washerAdapter = new WasherAdapter(getApplicationContext(), washerList);
+                    washerListView.setAdapter(washerAdapter);
                 } else {
                     Toast.makeText(TableViewActivity.this, getResources().getString(R.string.table_activity_failed), Toast.LENGTH_SHORT).show();
                 }
