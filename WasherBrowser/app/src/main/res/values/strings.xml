@@ -7,5 +7,5 @@
     <string name="main_activity_failed">Please check Wi-Fi connection</string>
     <string name="main_activity_input_url">http://admin.kaist.ac.kr:3535/get_all</string>
 
-    <string name="table_activity_failed">Failed. Please try again.</string>
+    <string name="table_activity_failed">Failed to load.try again...</string>
 </resources>

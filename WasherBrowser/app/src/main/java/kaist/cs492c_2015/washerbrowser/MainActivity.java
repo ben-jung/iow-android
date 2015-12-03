@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private final int MIN_SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 2000;
 
     private String macAddress = null;
 
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
                     MainActivity.this.finish();
                 }
             }
-        }, MIN_SPLASH_DISPLAY_LENGTH);
+        }, SPLASH_DISPLAY_LENGTH);
     }
 
     private String getMacId() {

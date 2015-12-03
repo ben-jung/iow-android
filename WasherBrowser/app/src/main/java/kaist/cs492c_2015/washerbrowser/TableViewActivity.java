@@ -24,8 +24,6 @@ import java.util.ArrayList;
 
 public class TableViewActivity extends AppCompatActivity {
 
-    private final int REFRESH_LENGTH = 1000;
-    private String washerList = "";
     private FloatingActionButton fab;
     private ListView washerListView;
     private WasherAdapter washerAdapter;
@@ -51,20 +49,6 @@ public class TableViewActivity extends AppCompatActivity {
         fab.setClickable(false);
         GetStringFromUrl getStringFromUrl = new GetStringFromUrl();
         getStringFromUrl.execute(getResources().getString(R.string.main_activity_input_url));
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.i("List: ", washerList);
-                if (!washerList.equals("")) {
-                    washerAdapter = new WasherAdapter(getApplicationContext(), washerList);
-                    washerListView.setAdapter(washerAdapter);
-                } else {
-                    Toast.makeText(TableViewActivity.this, getResources().getString(R.string.table_activity_failed), Toast.LENGTH_SHORT).show();
-                }
-                fab.setClickable(true);
-            }
-        }, REFRESH_LENGTH);
     }
 
     public class GetStringFromUrl extends AsyncTask<String, Void, String> {
@@ -106,10 +90,12 @@ public class TableViewActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             if (result == null) {
-
+                Toast.makeText(TableViewActivity.this, getResources().getString(R.string.table_activity_failed), Toast.LENGTH_SHORT).show();
             } else {
-                washerList = result;
+                washerAdapter = new WasherAdapter(getApplicationContext(), result);
+                washerListView.setAdapter(washerAdapter);
             }
+            fab.setClickable(true);
         }
     }
 
