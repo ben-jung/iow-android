@@ -28,6 +28,8 @@ public class TableViewActivity extends AppCompatActivity {
     private ListView washerListView;
     private WasherAdapter washerAdapter;
     private String macAddress;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

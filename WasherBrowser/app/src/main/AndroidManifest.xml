@@ -24,12 +24,23 @@
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".TableViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true">
         </activity>
 
         <receiver
@@ -57,12 +68,6 @@
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
-
-        <activity
-            android:name=".TableViewActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name" >
-        </activity>
 
         <service
             android:name=".RegistrationIntentService"

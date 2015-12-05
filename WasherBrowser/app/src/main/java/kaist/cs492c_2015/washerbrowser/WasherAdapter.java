@@ -112,7 +112,11 @@ public class WasherAdapter extends BaseAdapter {
         } else {
             viewHolder.alarmButton.setBackgroundResource(R.drawable.alarm_off);
         }
-        viewHolder.location.setText(w.dorm.toUpperCase() + " " + w.floor + "F " + w.id);
+        String leftRight = "Left";
+        if (w.id % 2 == 0) {
+            leftRight = "Right";
+        }
+        viewHolder.location.setText(w.dorm.toUpperCase() + " " + w.floor + "F " + leftRight);
         viewHolder.position = position;
 
         return convertView;
@@ -137,8 +141,8 @@ public class WasherAdapter extends BaseAdapter {
                 String url = String.format(context.getResources().getString(R.string.table_activity_tracking_url),
                         washer.id, state, RegistrationIntentService.TOKEN);
 
-                GetStringFromUrl2 getStringFromUrl = new GetStringFromUrl2();
-                getStringFromUrl.execute(url);
+                SendTracking sendTracking = new SendTracking();
+                sendTracking.execute(url);
 
                 notifyDataSetChanged();
             }
@@ -162,7 +166,7 @@ public class WasherAdapter extends BaseAdapter {
         public int position;
     }
 
-    public class GetStringFromUrl2 extends AsyncTask<String, Void, String> {
+    public class SendTracking extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {

@@ -16,20 +16,30 @@ package kaist.cs492c_2015.washerbrowser;
  * limitations under the License.
  */
 
+        import android.app.AlertDialog;
         import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.media.RingtoneManager;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
+        import android.preference.PreferenceManager;
+        import android.support.v4.app.NotificationCompat;
+        import android.util.Log;
 
-import com.google.android.gms.gcm.GcmListenerService;
+        import com.google.android.gms.gcm.GcmListenerService;
+
+        import org.json.JSONArray;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
+    SharedPreferences mPref;
 
     /**
      * Called when message is received.
@@ -42,7 +52,7 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
-
+        Log.i("MESSAGE", message);
         if (from.startsWith("/topics/")) {
             // message received from some topic.
         } else {
@@ -61,7 +71,29 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+
+        String id = "";
+        String floor = "";
+        String dorm = "";
+        try {
+            JSONObject jsonObject = new JSONObject(message);
+            id = jsonObject.getString("id");
+            floor = jsonObject.getString("floor");
+            dorm = jsonObject.getString("dorm");
+        } catch (JSONException e) {
+            Log.getStackTraceString(e);
+        }
+
+        mPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = mPref.edit();
+        editor.putBoolean(id, false);
+        editor.commit();
+        String leftRight = "Left";
+        if (Integer.parseInt(id) % 2 == 0) {
+            leftRight = "Right";
+        }
+        String msg = dorm.toUpperCase() + " " + floor + "F " + leftRight + " is Available!";
+        sendNotification(msg);
         // [END_EXCLUDE]
     }
     // [END receive_message]
@@ -81,7 +113,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                .setContentTitle("GCM Message")
+                .setContentTitle("Find available washer")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
@@ -91,5 +123,17 @@ public class MyGcmListenerService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        /*
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("Alert message to be shown");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+        */
     }
 }
