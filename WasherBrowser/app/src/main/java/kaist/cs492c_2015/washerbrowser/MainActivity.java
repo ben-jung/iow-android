@@ -30,8 +30,6 @@ public class MainActivity extends Activity {
 
     private String macAddress = null;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-    private ProgressBar mRegistrationProgressBar;
-    private TextView mInformationTextView;
 
 
     @Override
@@ -47,6 +45,7 @@ public class MainActivity extends Activity {
                 if (macAddress != null) {
                     Log.i("Address: ", macAddress);
                     Intent intent = new Intent(MainActivity.this, TableViewActivity.class);
+                    intent.putExtra("macAddress", macAddress);
                     MainActivity.this.startActivity(intent);
                     MainActivity.this.finish();
                 } else {
@@ -57,23 +56,16 @@ public class MainActivity extends Activity {
         }, SPLASH_DISPLAY_LENGTH);
 
         //sera's part
-        mRegistrationProgressBar = (ProgressBar) findViewById(R.id.registrationProgressBar);
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
                 SharedPreferences sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(context);
                 boolean sentToken = sharedPreferences
                         .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
-                if (sentToken) {
-                    mInformationTextView.setText(getString(R.string.gcm_send_message));
-                } else {
-                    mInformationTextView.setText(getString(R.string.token_error_message));
-                }
+
             }
         };
-        mInformationTextView = (TextView) findViewById(R.id.informationTextView);
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.

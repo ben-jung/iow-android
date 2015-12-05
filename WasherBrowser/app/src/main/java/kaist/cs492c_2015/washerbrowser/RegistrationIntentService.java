@@ -25,6 +25,7 @@ import java.net.URL;
  * helper methods.
  */
 public class RegistrationIntentService extends IntentService {
+    public static String TOKEN = "";
     private static final String TAG = "RegIntentService";
     private static final String[] TOPICS = {"global"};
     // TODO: Rename actions, choose action names that describe tasks that this
@@ -76,7 +77,7 @@ public class RegistrationIntentService extends IntentService {
                         GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
                 // [END get_token]
                 Log.i(TAG, "GCM Registration Token: " + token);
-
+                TOKEN = token;
                 // TODO: Implement this method to send any registration to your app's servers.
                 sendRegistrationToServer(token);
                 // Subscribe to topic channels

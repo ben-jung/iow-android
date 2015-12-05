@@ -1,5 +1,6 @@
 package kaist.cs492c_2015.washerbrowser;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +20,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 
 public class TableViewActivity extends AppCompatActivity {
@@ -27,12 +27,13 @@ public class TableViewActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private ListView washerListView;
     private WasherAdapter washerAdapter;
-
+    private String macAddress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tableview);
-
+        Intent intent = getIntent();
+        macAddress = intent.getStringExtra("macAddress");
         washerListView = (ListView) findViewById(R.id.washerListView);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -48,7 +49,7 @@ public class TableViewActivity extends AppCompatActivity {
     protected void getWasherList() {
         fab.setClickable(false);
         GetStringFromUrl getStringFromUrl = new GetStringFromUrl();
-        getStringFromUrl.execute(getResources().getString(R.string.main_activity_input_url));
+        getStringFromUrl.execute(getResources().getString(R.string.main_activity_input_url)+macAddress);
     }
 
     public class GetStringFromUrl extends AsyncTask<String, Void, String> {
