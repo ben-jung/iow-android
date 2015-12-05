@@ -5,8 +5,11 @@
     <string name="main_refresh_button">Click to Refresh</string>
     <string name="main_name_content">Washer\nBrowser</string>
     <string name="main_activity_failed">Please check Wi-Fi connection</string>
+    <string name="main_activity_input_url">http://admin.kaist.ac.kr:3535/get_all</string>
 
-     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+    <string name="table_activity_failed">Failed to load.try again...</string>
+
+    <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
         send downstream messages to this app.</string>
     <string name="registering_message">Generating InstanceID token...</string>
     <string name="token_error_message">An error occurred while either fetching the InstanceID token,

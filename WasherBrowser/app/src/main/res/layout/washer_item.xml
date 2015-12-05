@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:textAlignment="center"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="70dp"
     android:clickable="true"
-    android:gravity="center"
-    android:transitionGroup="true">
+    android:gravity="center_vertical"
+    android:background="@color/main_name">
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/washerImageView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="Location"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:id="@+id/locationTextView"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/washerImageView" />
 
-</LinearLayout>
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/alarmImageButton"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -23,7 +24,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 public class MainActivity extends Activity {
 
-    private final int MIN_SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 2000;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
 
@@ -46,7 +47,6 @@ public class MainActivity extends Activity {
                 if (macAddress != null) {
                     Log.i("Address: ", macAddress);
                     Intent intent = new Intent(MainActivity.this, TableViewActivity.class);
-                    //intent.putExtra("fileList", fileList);
                     MainActivity.this.startActivity(intent);
                     MainActivity.this.finish();
                 } else {
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
                     MainActivity.this.finish();
                 }
             }
-        }, MIN_SPLASH_DISPLAY_LENGTH);
+        }, SPLASH_DISPLAY_LENGTH);
 
         //sera's part
         mRegistrationProgressBar = (ProgressBar) findViewById(R.id.registrationProgressBar);
