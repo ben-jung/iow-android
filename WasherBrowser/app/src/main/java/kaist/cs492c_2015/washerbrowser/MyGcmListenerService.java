@@ -16,25 +16,22 @@ package kaist.cs492c_2015.washerbrowser;
  * limitations under the License.
  */
 
-        import android.app.AlertDialog;
-        import android.app.NotificationManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.content.SharedPreferences;
-        import android.media.RingtoneManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-        import android.preference.PreferenceManager;
-        import android.support.v4.app.NotificationCompat;
-        import android.util.Log;
+import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
-        import com.google.android.gms.gcm.GcmListenerService;
+import com.google.android.gms.gcm.GcmListenerService;
 
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MyGcmListenerService extends GcmListenerService {
 
@@ -123,17 +120,14 @@ public class MyGcmListenerService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-        /*
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("Alert message to be shown");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-        */
+
+        launchPopupActivity(this, message);
+    }
+
+    private void launchPopupActivity(Context context, String datavalue) {
+        Intent pupInt = new Intent(context, ShowPopup.class);
+        pupInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+        pupInt.putExtra("customdata", datavalue);
+        context.getApplicationContext().startActivity(pupInt);
     }
 }
