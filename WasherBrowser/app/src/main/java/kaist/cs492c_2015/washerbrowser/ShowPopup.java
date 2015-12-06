@@ -3,17 +3,11 @@ package kaist.cs492c_2015.washerbrowser;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ShowPopup extends Activity implements OnClickListener {
-
-    Button ok;
-    Button cancel;
-
-    boolean click = true;
+public class ShowPopup extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,21 +21,21 @@ public class ShowPopup extends Activity implements OnClickListener {
         TextView durationTitle = (TextView) findViewById(R.id.durationTitle);
         durationTitle.setText(getIntent().getStringExtra("customdata"));
         durationTitle.setTextSize(20);
-        ok = (Button)findViewById(R.id.popOkB);
-        ok.setOnClickListener(this);
-        cancel = (Button)findViewById(R.id.popCancelB);
-        cancel.setOnClickListener(this);
-    }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.popOkB:
+        Button ok = (Button)findViewById(R.id.popOkB);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
-                break;
-            case R.id.popCancelB:
+            }
+        });
+
+        Button cancel = (Button)findViewById(R.id.popCancelB);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
-                break;
-        }
+            }
+        });
     }
 }

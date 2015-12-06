@@ -114,6 +114,8 @@ public class MyGcmListenerService extends GcmListenerService {
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000 })
+                .setSmallIcon(R.drawable.washer_green)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =
